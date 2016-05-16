@@ -134,6 +134,6 @@ namespace Adventure.EFCodeFirst.Models
                 .IsFixedLength();
         }
 
-        public System.Data.Entity.DbSet<Adventure.EFCodeFirst.Models.DTOCustomer> DTOCustomers { get; set; }
+        ///public System.Data.Entity.DbSet<Adventure.EFCodeFirst.Models.CustomerDTO> CustomersDTO { get; set; }
     }
 }

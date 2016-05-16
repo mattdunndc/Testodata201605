@@ -54,7 +54,7 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AdventureEntities.cs" />
     <Compile Include="Models\AdventureModel.cs" />
-    <Compile Include="Models\DTOCustomer.cs" />
+    <Compile Include="Models\CustomerDTO.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerAddress.cs" />
     <Compile Include="Models\Product.cs" />

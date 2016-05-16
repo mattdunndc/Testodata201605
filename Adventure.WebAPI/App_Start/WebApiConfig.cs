@@ -8,6 +8,9 @@ using Newtonsoft.Json.Serialization;
 using System.Web.OData.Builder;
 using System.Web.OData.Extensions;
 using Adventure.EFCodeFirst.Models;
+using Newtonsoft.Json;
+using System.Web.Http.Cors;
+using Microsoft.OData.Edm;
 
 namespace Adventure.WebAPI
 {
@@ -15,8 +18,14 @@ namespace Adventure.WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
-                                  
+            var jsonSerializerSettings = config.Formatters.JsonFormatter.SerializerSettings;
+            jsonSerializerSettings.Formatting = Formatting.None;
+            jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
             // Web API configuration and services
+            var allowedCors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(allowedCors);
+
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
@@ -24,21 +33,49 @@ namespace Adventure.WebAPI
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            ////
-            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            //
+            //config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
+            config.MapODataServiceRoute(
+               routeName: "ODataRoute",
+               routePrefix: "odata",
+               model: GenerateEntityDataModel());
 
-            builder.EntitySet<DTOCustomer>("OData4");
-            builder.EntitySet<Customer>("Customers");
-            builder.EntitySet<CustomerAddress>("CustomerAddresses");
-            builder.EntitySet<SalesOrderHeader>("SalesOrderHeaders");
-
-            config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
-            ////
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            ////
+            //ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+
+            //builder.EntitySet<CustomerDTO>("OData4");
+            //builder.EntitySet<Customer>("Customers");
+            //builder.EntitySet<CustomerAddress>("CustomerAddresses");
+            //builder.EntitySet<SalesOrderHeader>("SalesOrderHeaders");
+
+            
+            ////
         }
+
+        #region GenerateEntityDataModel
+        private static IEdmModel GenerateEntityDataModel()
+        {
+            ODataModelBuilder builder = new ODataConventionModelBuilder();
+
+            // Queryable DTOTask
+            builder.EntitySet<CustomerDTO>("CustomersDTO");
+            builder.EntitySet<Customer>("Customers");
+            builder.EntitySet<CustomerAddress>("CustomerAddresses");
+            builder.EntitySet<SalesOrderHeader>("SalesOrderHeaders");
+
+            // FilterByStatus function that takes a parameter and returns Tasks
+            //var ByStatusFunction = builder.Function("ByStatus");
+            //ByStatusFunction.ReturnsCollectionFromEntitySet<Models.DTOTask>("DTOTasks");
+            //ByStatusFunction.Parameter<System.Boolean>("IsComplete");
+
+            return builder.GetEdmModel();
+        }
+        #endregion
     }
 }

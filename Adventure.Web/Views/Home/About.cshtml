@@ -1,0 +1,68 @@
+﻿@*about.cshtml*@
+<!DOCTYPE html>
+<html ng-app="testapp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-resource.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <!-- optional for auto complete / suggested value feature -->
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+
+    <link href="~/Scripts/advanced/angular-advanced-searchbox.css" rel="stylesheet" />
+    <script src="~/Scripts/advanced/angular-advanced-searchbox-tpls.min.js"></script>
+    <link href="~/Scripts/angular-ui-grid/ui-grid.min.css" rel="stylesheet" />
+    <script src="~/Scripts/angular-ui-grid/ui-grid.min.js"></script>
+
+    <script src="~/Scripts/angular-pagination/dirPagination.js"></script>
+    
+    <script src="~/app/app.js"></script>
+    <script src="~/app/ctrl/userCtrl.js"></script>
+    <script src="~/app/services/testservices.js"></script>
+    <h2>About</h2>
+</head>
+
+    <body ng-controller="userCtrl" ng-init="getCustomers()">   
+        
+        <h2>Tasty Paginated Menu</h2>
+        
+        <div class="row">
+            <div class="col-xs-4">
+                <label for="search">Search:</label>
+                <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+            </div>
+            <div class="col-xs-4">
+                <label for="search">items per page:</label>
+                <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+            </div>
+            <div class="col-xs-4">
+                <h4>Page No.: {{ currentPage }}</h4>
+            </div>
+        </div>
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul>
+                    <li dir-paginate="customer in customers | filter:q | itemsPerPage: pageSize" current-page="currentPage">{{ customer.FirstName }} {{ customer.LastName }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-">
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="~/app/ctrl/dirPagination.tpl.html"></dir-pagination-controls>
+        </div>  
+             
+        
+        <script type="text/javascript">
+        $(function () {
+            toastr.options = {
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": true,
+                "progressBar": true,
+                "timeOut": "3000",
+            }
+        });
+        </script>
+    </body>
+</html>

@@ -13,6 +13,8 @@ using System.Web.OData.Query;
 using System.Web.OData.Routing;
 using Adventure.EFCodeFirst.Models;
 
+using AutoMapper;
+
 namespace Adventure.WebAPI.Controllers
 {
     /*
@@ -30,6 +32,9 @@ namespace Adventure.WebAPI.Controllers
     public class CustomersController : ODataController
     {
         private AdventureEntities db = new AdventureEntities();
+
+        private IMapper _mapper;
+        public CustomersController(IMapper mapper) { _mapper = mapper; }
 
         // GET: odata/Customers
         [EnableQuery]
