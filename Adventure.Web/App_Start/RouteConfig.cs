@@ -13,6 +13,22 @@ namespace Adventure.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //name: "AboutEdit",
+            //url: "Home/About",
+            //defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
+            //);
+            //routes.MapRoute(
+            //name: "EventsCourses",
+            //url: "Home/About",
+            //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            //);
+            //routes.MapRoute(
+            //name: "EventsSpeakers",
+            //url: "Home/Search",
+            //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            //);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

@@ -33,5 +33,12 @@ namespace Adventure.Web.Controllers
 
             return View();
         }
+
+        public ActionResult Tweets()
+        {
+            ViewBag.Message = "Your tweets page.";
+
+            return View();
+        }
     }
 }

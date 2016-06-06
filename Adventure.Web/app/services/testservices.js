@@ -1,8 +1,12 @@
-﻿mod.factory('customerService', function ($resource) {
-    var odataUrl = 'http://localhost:4999/odata/CustomersDTO';
+﻿mod.factory('dataService', function ($resource) {
+    var odataUrl = 'http://localhost:4999/odata/';
+    var apiUrl = 'http://localhost:4999/api/tweets/mattdunndc';
+    //http://twitterservice.azurewebsites.net/api/tweets/mattdunndc'
+    //http://http://localhost:4999/odata/CustomersDTO
+
     return $resource('', {},
         {
-            'getAll': { method: 'GET', url: odataUrl },
+            'getAll': { method: 'GET', params: { entity: '@entity' }, url: odataUrl + ':entity' },
             'getTop10': { method: 'GET', url: odataUrl + '?$top=10' },
             'create': { method: 'POST', url: odataUrl },
             'patch': { method: 'PATCH', params: { key: '@key' }, url: odataUrl + '(:key)' },
@@ -17,8 +21,24 @@
         success: function (text) {
             toastr.success(text, "Success");
         },
+        info: function (text) {
+            toastr.info(text, "Information");
+        },
+        warning: function (text) {
+            toastr.warning(text, "Warning");
+        },
         error: function (text) {
             toastr.error(text, "Error");
         }
     };
-});
+})
+.factory('apiService', ['$http',function ($http) {
+    var urlBase = 'http://localhost:4999/api';
+    var apiService = {};
+    apiService.getTweets = function (userName) {
+        return $http.get(urlBase + '/tweets/'+userName);
+    };
+
+    return apiService;
+    
+}])

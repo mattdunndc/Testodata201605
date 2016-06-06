@@ -7,9 +7,5 @@
   { key: "district", name: "District", placeholder: "District...", restrictToSuggestedValues: true, suggestedValues: ['Central', 'Northeastern', 'Southern', 'Western', 'Midsize and Credit Card', 'Large Bank', 'Headquarters', 'Technology Service Providers', 'International Banking'] },
   { key: "job", name: "Job No.", placeholder: "Job No..." }
     ];
-
-    
-
 }
-
 mod.controller('testCtrl', testCtrl);

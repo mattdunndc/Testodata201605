@@ -11,6 +11,7 @@ using Adventure.EFCodeFirst.Models;
 using Newtonsoft.Json;
 using System.Web.Http.Cors;
 using Microsoft.OData.Edm;
+using Adventure.WebAPI.Models;
 
 namespace Adventure.WebAPI
 {
@@ -68,6 +69,8 @@ namespace Adventure.WebAPI
             builder.EntitySet<Customer>("Customers");
             builder.EntitySet<CustomerAddress>("CustomerAddresses");
             builder.EntitySet<SalesOrderHeader>("SalesOrderHeaders");
+
+            builder.EntitySet<Tweet>("Tweets");
 
             // FilterByStatus function that takes a parameter and returns Tasks
             //var ByStatusFunction = builder.Function("ByStatus");

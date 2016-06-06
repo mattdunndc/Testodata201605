@@ -158,7 +158,9 @@
     <Content Include="app\app.js" />
     <Content Include="app\ctrl\gridCtrl.js" />
     <Content Include="app\ctrl\testCtrl.js" />
+    <Content Include="app\ctrl\tweetCtrl.js" />
     <Content Include="app\ctrl\userCtrl.js" />
+    <Content Include="app\services\modalsvc.js" />
     <Content Include="app\services\testservices.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -1007,6 +1009,8 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Home\About - Copy.cshtml" />
+    <Content Include="Views\Home\Preferences.cshtml" />
+    <Content Include="Views\Home\Tweets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
