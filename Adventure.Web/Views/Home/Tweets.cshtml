@@ -1,0 +1,39 @@
+﻿<html ng-app="testapp" ng-cloak>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Scripts/advanced/angular-advanced-searchbox.css" rel="stylesheet" />
+    <script src="~/Scripts/advanced/angular-advanced-searchbox-tpls.min.js"></script>
+    <!-- optional for auto complete / suggested value feature -->
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+
+    <link href="~/Scripts/angular-ui-grid/ui-grid.min.css" rel="stylesheet" />
+    <script src="~/Scripts/angular-ui-grid/ui-grid.min.js"></script>
+
+    <script src="~/Scripts/angular-pagination/dirPagination.js"></script>
+
+    <script src="~/app/app.js"></script>
+    <script src="~/app/ctrl/tweetCtrl.js"></script>
+    <script src="~/app/services/testservices.js"></script>
+</head>
+
+<body>
+
+    <div ng-controller="tweetCtrl">
+        <table class="table">
+            <tr>
+                <th>imageUrl</th>
+                <th>userName</th>
+                <th>msg</th>
+            </tr>
+            <tr ng-repeat="a in tweets">
+                <td><img src="{{a.imageUrl}}"/> </td>
+                <td>{{a.userName}}</td>
+                <td>{{a.msg}}</td>
+            </tr>
+         </table>
+        <!--   -->
+
+        
+</body>
+</html>
